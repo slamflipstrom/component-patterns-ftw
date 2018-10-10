@@ -1,0 +1,14 @@
+{
+  "name": "component-patterns-ftw",
+  "version": "1.0.0",
+  "description": "Component Patterns Talk by Sam Lindstrom",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Sam Lindstrom",
+  "license": "ISC",
+  "devDependencies": {
+    "mdx-deck": "^1.7.7"
+  }
+}
