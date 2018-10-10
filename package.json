@@ -4,6 +4,8 @@
   "description": "Component Patterns Talk by Sam Lindstrom",
   "main": "index.js",
   "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.mdx",
     "test": "test"
   },
   "author": "Sam Lindstrom",
