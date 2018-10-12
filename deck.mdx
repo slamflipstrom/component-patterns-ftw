@@ -1,5 +1,21 @@
 
+import {CodeSurfer } from "mdx-deck-code-surfer"
+import nightOwl from "prism-react-renderer/themes/nightOwl"
+
 # React Component Patterns
+
+<CodeSurfer 
+code={require("raw-loader!./snippets/1.snippet")}
+title="Test"
+notes="Test notes"
+theme={nightOwl}
+showNumbers
+steps={[
+  { lines: [2], notes: 'line 5' },  
+  { range: [4,9], notes: 'line 5' }
+  ]}
+/>
+
 
 ---
 
@@ -7,20 +23,34 @@
 
 ---
 
-# Baby's 1st Component
+
+```jsx
+class HelloWorld extends React.Component {
+  constructor() {
+    super()
+  }
+
+  render() {
+    return (
+      <h1>Hello</h1>
+    )
+  }
+}
+```
 
 ---
+
 # Stateful Component
 
 ---
 
+import  PriceTicker  from 'components/PriceTicker/PriceTicker'
+
 ```jsx
 <PriceTicker />
 ```
----
-import  PriceTicker  from 'components/PriceTicker/PriceTicker'
-
 <PriceTicker />
+
 ---
 
 # Container vs. Presentational Components
