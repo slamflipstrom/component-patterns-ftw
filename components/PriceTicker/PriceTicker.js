@@ -1,6 +1,6 @@
 import React from "react"
 
-// import "./PriceTicker.scss";
+import "../../styles.scss"
 
 const PriceTickerRow = ({ currency, price = "0.00" }) => {
   return (
