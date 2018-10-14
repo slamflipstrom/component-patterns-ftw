@@ -1,47 +1,39 @@
 
+import { Notes } from 'mdx-deck'
 import {CodeSurfer } from "mdx-deck-code-surfer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
 
 # React Component Patterns
-
-<CodeSurfer 
-code={require("raw-loader!./snippets/1.snippet")}
-title="Test"
-notes="Test notes"
-theme={nightOwl}
-showNumbers
-steps={[
-  { lines: [2], notes: 'line 5' },  
-  { range: [4,9], notes: 'line 5' }
-  ]}
-/>
-
-
 ---
 
 # Some background
-
+<Notes>
+  Only visible in presenter mode
+</Notes>
 ---
-
-
-```jsx
-class HelloWorld extends React.Component {
-  constructor() {
-    super()
-  }
-
-  render() {
-    return (
-      <h1>Hello</h1>
-    )
-  }
-}
-```
-
+<CodeSurfer 
+  code={require("raw-loader!./snippets/first.snippet")}
+  theme={nightOwl}
+  showNumbers
+/>
 ---
-
 # Stateful Component
-
+---
+<CodeSurfer 
+  code={require("raw-loader!./snippets/stateful.snippet")}
+  title="Stateful Component"
+  theme={nightOwl}
+  steps={[
+    { notes: ''},
+    { range: [16,20]}
+  ]}
+/>
+---
+## Advantages
+- Easy to manage component stateful
+## Disadvantages
+- Can be more complexity than we need
+- Not all components need to manage state
 ---
 
 import  PriceTicker  from 'components/PriceTicker/PriceTicker'
@@ -58,6 +50,20 @@ import  PriceTicker  from 'components/PriceTicker/PriceTicker'
 
 ---
 # Functional Stateless Component
+
+---
+
+<CodeSurfer 
+  code={require("raw-loader!./snippets/sfc.snippet")}
+  title="Test"
+  notes="Test notes"
+  theme={nightOwl}
+  showNumbers
+  steps={[
+    { notes: '' },
+    { range: [3,9], notes: 'Stateless Functional' }
+  ]}
+/>
 
 ---
 
@@ -88,6 +94,14 @@ connect(mapStateToProps)(PriceTicker)
 # The Future of Render Props
 
 `show suspense example`
+
+---
+
+<img src="./assets/images/salt.svg" width="400px" height="auto"/>
+
+---
+
+# Thanks
 
 ---
 

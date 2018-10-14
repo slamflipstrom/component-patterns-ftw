@@ -1,0 +1,25 @@
+class PriceTicker extends React.Component {
+  constructor() {
+    super()
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  render() {
+    return (
+      <div className="PriceTicker">
+        <div>BTC: this.props.btcPrice </div>
+        <div>ETH: this.props.ethPrice </div>
+        <div>LTC: this.props.ltcPrice </div>
+      </div>
+    )
+  }
+}
+
+<PriceTicker />
