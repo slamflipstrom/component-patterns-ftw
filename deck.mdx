@@ -1,7 +1,12 @@
 
-import { Notes } from 'mdx-deck'
+import { Image, Notes } from 'mdx-deck'
+import { Invert } from 'mdx-deck/layouts'
 import {CodeSurfer } from "mdx-deck-code-surfer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
+
+import  PriceTicker  from 'components/PriceTicker/PriceTicker'
+import  Tooltip  from 'components/Tooltip/Tooltip'
+import  withThemeToggle  from 'components/darkThemeToggle/darkThemeToggle'
 
 # React Component Patterns
 ---
@@ -14,7 +19,6 @@ import nightOwl from "prism-react-renderer/themes/nightOwl"
 <CodeSurfer 
   code={require("raw-loader!./snippets/first.snippet")}
   theme={nightOwl}
-  showNumbers
 />
 ---
 # Stateful Component
@@ -28,58 +32,125 @@ import nightOwl from "prism-react-renderer/themes/nightOwl"
     { range: [16,20]}
   ]}
 />
+
 ---
+
+
+<PriceTicker />
+<Tooltip contents="hi React Denver" id="tooltip1"/>
+
+---
+
+export default Invert
+
 ## Advantages
-- Easy to manage component stateful
+- Easy to manage component state
 ## Disadvantages
 - Can be more complexity than we need
 - Not all components need to manage state
----
-
-import  PriceTicker  from 'components/PriceTicker/PriceTicker'
-
-```jsx
-<PriceTicker />
-```
-<PriceTicker />
 
 ---
 
-# Container vs. Presentational Components
-- see React-Live and Code-Surfer
 
----
-# Functional Stateless Component
+# Stateless Functional Component
 
 ---
 
 <CodeSurfer 
   code={require("raw-loader!./snippets/sfc.snippet")}
-  title="Test"
-  notes="Test notes"
+  title="Stateless Functional Component (SFC)"
+  theme={nightOwl}
+/>
+
+---
+export default Invert
+
+# Stateless Functional 
+
+## Advantages
+ - simplicity
+ - enforces pure function practices
+ - easy to test
+ - eliminates ES6 class related boilerplate (constructor(), extends, etc)
+ - no 'this' keyword
+
+## Disadvantages
+  - unable to manage state
+
+<Notes>Inability to manage state is more of a feature and not a bug</Notes>
+
+---
+
+<Image src="./assets/images/sfc-stateful-babel-comparision.png" size="1100px" />
+
+Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc)
+---
+
+
+# Container vs. Presentational Components
+
+---
+
+<CodeSurfer 
+  code={require("raw-loader!./snippets/p&c.snippet")}
+  title="Presentational + Container"
   theme={nightOwl}
   showNumbers
   steps={[
-    { notes: '' },
-    { range: [3,9], notes: 'Stateless Functional' }
+    { notes: ''},
+    { range: [1,7]},
+    { range: [9,43]},
+    { notes: ''},
   ]}
 />
 
 ---
 
-```jsx
-<PriceTicker />
-```
+# Stakeholder Demands
+
+ *"We want dark mode"*
+
 ---
 # Higher Order Component
 
 ---
 
-## Look familiar?
-`js
-connect(mapStateToProps)(PriceTicker)
-`
+## Higher Order Function:
+*A higher order function is a function that takes a function as an argument, or returns a function.*
+<Notes>
+  - Allows for more declarative code
+  - In contrast to first order functions, which don’t take a function as an argument or return a function as output
+</Notes>
 
+---
+### Higher Order Function:
+ 
+---
+### Higher Order Function:
+* `Array.map()`
+* `Array.filter()`
+* `Array.reduce()`
+
+---
+
+## Look familiar?
+
+<CodeSurfer 
+  code={'jsx connect(mapStateToProps)(PriceTicker))'}
+  theme={nightOwl}
+/>
+
+---
+
+
+
+---
+export default Invert
+
+# Higher Order Component (HOC)
+
+## Advantages
+## Disadvantages
 
 ---
 
@@ -88,6 +159,14 @@ connect(mapStateToProps)(PriceTicker)
 ---
 
 # Understanding JSX
+
+---
+export default Invert
+
+# Render Props
+
+## Advantages
+## Disadvantages
 
 ---
 

@@ -1,10 +1,6 @@
-import React from "react"
-
-import "./PriceTicker.scss"
-
 const PriceTickerRow = ({ currency, price = "0.00" }) => {
   return (
-    <div className="PriceTickerRow">
+    <div className="PriceTicker-row">
       {currency}: ${price}
     </div>
   )
@@ -21,12 +17,14 @@ class PriceTicker extends React.Component {
   }
 
   updatePrices() {
-    //ApiSvc call
-    console.log("fetching latest prices:", new Date().toLocaleString())
+    ApiSvc.fetchPrices().then(res=> {
+      this.setState({prices: res.prices})
+    })
+    console.log('fetching latest prices')
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.updatePrices(), 5000)
+    this.interval = setInterval(() => this.updatePrices(), 5000);
   }
 
   componentWillUnmount() {
@@ -39,12 +37,7 @@ class PriceTicker extends React.Component {
         <PriceTickerRow currency="BTC" />
         <PriceTickerRow currency="ETH" />
         <PriceTickerRow currency="LTC" />
-        <button onClick={this.updatePrices} className="PriceTicker-btn">
-          Refresh Prices
-        </button>
       </div>
     )
   }
 }
-
-export default PriceTicker
