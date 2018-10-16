@@ -3,18 +3,19 @@ import { Image, Notes } from 'mdx-deck'
 import { Invert } from 'mdx-deck/layouts'
 import {CodeSurfer } from "mdx-deck-code-surfer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
-
 export { default as theme } from './theme'
 
 import  PriceTicker  from 'components/PriceTicker/PriceTicker'
 import  PriceTickerCompound  from 'components/PriceTicker/PriceTickerCompound'
-import  PriceTickerWithDarkTheme  from 'components/PriceTicker/PriceTickerThemeToggle'
-import  Tooltip  from 'components/Tooltip/Tooltip'
+import  PriceTickerWithDarkThemeHOC  from 'components/PriceTicker/PriceTickerHOC'
+import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceTickerRenderProps'
+// import  Tooltip  from 'components/Tooltip/Tooltip'
 
 # React Component Patterns
 
   
 ### Sam Lindstrom
+
 ---
 
 # Some background
@@ -25,10 +26,12 @@ import  Tooltip  from 'components/Tooltip/Tooltip'
 </Notes>
 
 ---
+
 <CodeSurfer 
   code={require("raw-loader!./snippets/first.snippet")}
   theme={nightOwl}
 />
+
 ---
 
 # React Component API
@@ -39,6 +42,7 @@ import  Tooltip  from 'components/Tooltip/Tooltip'
 - lifecycle events
 
 ---
+
 # Stateful Component
 
 ---
@@ -109,7 +113,6 @@ export default Invert
 Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc)
 
 ---
-
 
 # Container vs. Presentational Components
 
@@ -217,12 +220,12 @@ export default Invert
 
 ---
 
-
 # Stakeholder Demands
 
  *"We want dark mode"*
 
 ---
+
 # Higher Order Component
 
 <Notes>
@@ -242,14 +245,17 @@ export default Invert
 </Notes>
 
 ---
+
 ### Higher Order Function:
 Allows for more declarative code
 
 ---
+
 ### Higher Order Function:
 * `Array.map()`
 * `Array.filter()`
 * `Array.reduce()`
+
 ---
 
 <CodeSurfer 
@@ -263,25 +269,29 @@ Allows for more declarative code
 ```jsx
 import PriceTicker from "../PriceTicker"
 
-const PriceTickerWithDarkTheme = withDarkThemeToggle(PriceTicker)
+const PriceTickerWithDarkThemeHOC = withDarkThemeToggle(PriceTicker)
 
-<PriceTickerWithDarkTheme />
+<PriceTickerWithDarkThemeHOC />
 ```
 
 ---
 
 export default Invert
 
-<PriceTickerWithDarkTheme />
+<PriceTickerWithDarkThemeHOC />
 
 ---
+
 export default Invert
+
+TODO: build this out
 
 # Higher Order Component (HOC)
 
 ## Advantages
+  - allows for more composable code
 ## Disadvantages
-- where did this prop come from?
+  - prop obfuscation: where did this prop come from?
 
 ---
 
@@ -293,7 +303,7 @@ export default Invert
 
 ## Traditional Rendering of Child Components
 
-```
+```jsx
 const Parent = (props) => {
   return (
     <div>
@@ -302,39 +312,46 @@ const Parent = (props) => {
   )
 }
 ```
+<br/>
 
-```
+```jsx
 <Parent>
   <Child />
 </Parent>
 ```
 
 ---
-## Traditional Rendering of Child Components
 
-```
-const Parent = (props) => {
-  return (
-    <div>
-      { props.render }
-    </div>
-  )
-}
+## Rendering of Child Components via Render Prop
+
+```jsx
+  const Parent = (props) => {
+    return (
+      <div>
+        { props.render }
+      </div>
+    )
+  }
 ```
 
-```
+<br/>
+
+```jsx
 <Parent render={(something) => '<h1>Render ${something}</h1>'} />
 ```
 
---- 
+---
 
 # Understanding JSX
 
 ---
 
-## Remember: JSX is just a function call
+## Remember:
+## JSX is just a function call
 
-```
+<br/>
+
+```js
 React.createElement(
   type,
   [props],
@@ -344,12 +361,32 @@ React.createElement(
 
 ---
 
-## Remember: In JSX, curly braces indicate an argument to React.createElement()
+## In JSX, curly braces indicate an argument to React.createElement()
 
-[See Babel](https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9SA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=) 
+<a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9SA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">See Babel</a>
 
 ---
 
+<CodeSurfer 
+  code={require("raw-loader!./snippets/render-props.snippet")}
+  title="Implementation"
+  theme={nightOwl}
+  showNumbers
+    steps={[
+    { notes: ''},
+    { range: [4,28]},
+    { range: [72,74]}
+  ]}
+/>
+
+---
+export default Invert
+
+<PriceTickerWithDarkThemeRenderProps />
+
+---
+
+TODO: Consider showing this
 ## We can implement an HOC with a Render Prop
 
 ---

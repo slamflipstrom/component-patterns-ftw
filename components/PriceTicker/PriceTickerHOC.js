@@ -17,7 +17,7 @@ class PriceTicker extends React.Component {
 
     this.interval = null
     this.state = {
-      prices: {},
+      prices: {}
     }
   }
 
@@ -48,5 +48,5 @@ class PriceTicker extends React.Component {
   }
 }
 
-const PriceTickerWithDarkTheme = withDarkThemeToggle(PriceTicker)
-export default PriceTickerWithDarkTheme
+const PriceTickerWithDarkThemeHOC = withDarkThemeToggle(PriceTicker)
+export default PriceTickerWithDarkThemeHOC
