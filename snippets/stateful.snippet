@@ -1,10 +1,26 @@
 class PriceTicker extends React.Component {
   constructor() {
     super()
+
+    this.state = {
+      prices: {
+        BTC: '0.00',
+        ETH: '0.00',
+        LTC: '0.00',
+      }
+    }
+  }
+
+  updatePrices() {
+    ApiSvc.fetchPrices().then(response => {
+      this.setState({ prices: response })
+    }).catch(error => console.log(error))
+
+    console.log("fetching latest prices:", new Date().toLocaleString())
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 5000)
+    this.interval = setInterval(() => this.updatePrices(), 5000)
   }
 
   componentWillUnmount() {
@@ -12,11 +28,12 @@ class PriceTicker extends React.Component {
   }
 
   render() {
+    const { prices } = this.state
     return (
       <div className="PriceTicker">
-        <div>BTC: this.props.btcPrice </div>
-        <div>ETH: this.props.ethPrice </div>
-        <div>LTC: this.props.ltcPrice </div>
+        <div>BTC: { prices.BTC }</div>
+        <div>ETH: { prices.ETH }</div>
+        <div>LTC: { prices.LTC } </div>
       </div>
     )
   }

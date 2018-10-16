@@ -16,7 +16,7 @@ class PriceTicker extends React.Component {
 
     this.interval = null
     this.state = {
-      prices: {}
+      prices: {},
     }
   }
 
@@ -39,9 +39,6 @@ class PriceTicker extends React.Component {
         <PriceTickerRow currency="BTC" />
         <PriceTickerRow currency="ETH" />
         <PriceTickerRow currency="LTC" />
-        <button onClick={this.updatePrices} className="PriceTicker-btn">
-          Refresh Prices
-        </button>
       </div>
     )
   }

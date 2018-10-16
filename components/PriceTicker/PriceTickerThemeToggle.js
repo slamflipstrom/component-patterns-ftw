@@ -1,6 +1,11 @@
+import React from "react"
+import withDarkThemeToggle from "../withDarkThemeToggle/withDarkThemeToggle"
+
+import "./PriceTicker.scss"
+
 const PriceTickerRow = ({ currency, price = "0.00" }) => {
   return (
-    <div className="PriceTicker-row">
+    <div className="PriceTickerRow">
       {currency}: ${price}
     </div>
   )
@@ -12,24 +17,17 @@ class PriceTicker extends React.Component {
 
     this.interval = null
     this.state = {
-      prices: {
-        BTC: '0.00',
-        ETH: '0.00',
-        LTC: '0.00',
-      }
+      prices: {},
     }
   }
 
   updatePrices() {
-    ApiSvc.fetchPrices().then(response => {
-      this.setState({ prices: response })
-    }).catch(error => console.log(error))
-
+    //ApiSvc call
     console.log("fetching latest prices:", new Date().toLocaleString())
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => this.updatePrices(), 5000);
+    this.interval = setInterval(() => this.updatePrices(), 5000)
   }
 
   componentWillUnmount() {
@@ -38,11 +36,17 @@ class PriceTicker extends React.Component {
 
   render() {
     return (
-      <div className="PriceTicker">
+      <div className="PriceTickerThemeToggle PriceTicker">
         <PriceTickerRow currency="BTC" />
         <PriceTickerRow currency="ETH" />
         <PriceTickerRow currency="LTC" />
+        <button onClick={this.updatePrices} className="PriceTicker-btn">
+          Refresh Prices
+        </button>
       </div>
     )
   }
 }
+
+const PriceTickerWithDarkTheme = withDarkThemeToggle(PriceTicker)
+export default PriceTickerWithDarkTheme

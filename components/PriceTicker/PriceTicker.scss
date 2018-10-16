@@ -1,7 +1,10 @@
+h3 {
+  margin-top: 200px;
+}
+
 .PriceTicker {
   border: 4px solid blueviolet;
   border-radius: 4px;
-  margin: 30px;
   padding: 2px;
   list-style: none;
 
@@ -14,7 +17,9 @@
     transition: all 0.1s ease;
 
     &:hover {
-      // border: 3px solid salmon;
+      border: 3px solid #f9ada5;
+      // border: 3px solid #e65545;
+      // border: 3px solid lightgreen;
     }
   }
   &-btn {

@@ -4,12 +4,17 @@ import { Invert } from 'mdx-deck/layouts'
 import {CodeSurfer } from "mdx-deck-code-surfer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
 
+export { default as theme } from './theme'
+
 import  PriceTicker  from 'components/PriceTicker/PriceTicker'
 import  PriceTickerCompound  from 'components/PriceTicker/PriceTickerCompound'
+import  PriceTickerWithDarkTheme  from 'components/PriceTicker/PriceTickerThemeToggle'
 import  Tooltip  from 'components/Tooltip/Tooltip'
-import  withThemeToggle  from 'components/darkThemeToggle/darkThemeToggle'
 
 # React Component Patterns
+
+  
+### Sam Lindstrom
 ---
 
 # Some background
@@ -35,22 +40,25 @@ import  withThemeToggle  from 'components/darkThemeToggle/darkThemeToggle'
 
 ---
 # Stateful Component
+
 ---
 <CodeSurfer 
   code={require("raw-loader!./snippets/stateful.snippet")}
   title="Stateful Component"
   theme={nightOwl}
+  showNumbers
   steps={[
     { notes: ''},
-    { range: [16,20]}
+    { range: [5,11]},
+    { range: [14,20]}
   ]}
 />
 
 ---
 
+export default Invert
 
 <PriceTicker />
-<Tooltip contents="hi React Denver" id="tooltip1"/>
 
 ---
 
@@ -64,7 +72,6 @@ export default Invert
 
 ---
 
-
 # Stateless Functional Component
 
 ---
@@ -76,9 +83,10 @@ export default Invert
 />
 
 ---
+
 export default Invert
 
-# Stateless Functional Component
+# Stateless Functional
 
 ## Advantages
  - simplicity
@@ -99,6 +107,7 @@ export default Invert
 <Image src="./assets/images/sfc-stateful-babel-comparision.png" size="1100px" />
 
 Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc)
+
 ---
 
 
@@ -110,11 +119,10 @@ Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless
   code={require("raw-loader!./snippets/p&c.snippet")}
   title="Presentational + Container"
   theme={nightOwl}
-  showNumbers
   steps={[
     { notes: ''},
     { range: [1,7]},
-    { range: [9,43]},
+    { range: [9,48]},
     { notes: ''},
   ]}
 />
@@ -123,7 +131,7 @@ Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless
 
 # Stakeholder Demands
 
- *"We want to allow users refresh prices whenever they'd like"*
+ *"We want to allow users to refresh prices whenever they'd like"*
 
 ---
 
@@ -139,7 +147,8 @@ Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless
 
 Great for handling Rendering logic
 
-<Notes>Consider for a moment some of your own code. Do you have a React component that keeps getting new rendering options?
+<Notes>
+  - Consider for a moment some of your own code. Do you have a React component that keeps getting new rendering options?
   - Ryan Florence has a great talk on this though he doesn't use static properties
 </Notes>
 
@@ -161,19 +170,25 @@ Great for handling Rendering logic
   code={require("raw-loader!./snippets/compound.snippet")}
   title="Implementation"
   theme={nightOwl}
+  steps={[
+    { notes: ''},
+    { range: [5,15]},
+    { range: [38,49]},
+    { notes: ''},
+  ]}
 />
 
 ---
 
-# Stuff
-
 <CodeSurfer 
   code={require("raw-loader!./snippets/compound-usage.snippet")}
-  title="not"
+  title="Usage"
   theme={nightOwl}
 />
 
 ---
+
+export default Invert
 
 <PriceTickerCompound>
   <PriceTickerCompound.Button>Update</PriceTickerCompound.Button>
@@ -199,6 +214,7 @@ export default Invert
 <Notes>
   - Can be combined with the new React Context API to pass state to deeply nested children
 </Notes>
+
 ---
 
 
@@ -209,10 +225,17 @@ export default Invert
 ---
 # Higher Order Component
 
+<Notes>
+  - Common in 3rd party libraries
+  - Whereas a component transforms props into UI, a higher-order component transforms a component into another component.
+</Notes>
+
 ---
 
 ## Higher Order Function:
+
 *A higher order function is a function that takes a function as an argument, or returns a function.*
+
 <Notes>
   - Allows for more declarative code
   - In contrast to first order functions, which don’t take a function as an argument or return a function as output
@@ -220,25 +243,36 @@ export default Invert
 
 ---
 ### Higher Order Function:
- 
+Allows for more declarative code
+
 ---
 ### Higher Order Function:
 * `Array.map()`
 * `Array.filter()`
 * `Array.reduce()`
-
 ---
 
-## Look familiar?
-
 <CodeSurfer 
-  code={'jsx connect(mapStateToProps)(PriceTicker))'}
+  code={require("raw-loader!./snippets/hoc.snippet")}
+  title="Implementation"
   theme={nightOwl}
 />
 
 ---
 
+```jsx
+import PriceTicker from "../PriceTicker"
 
+const PriceTickerWithDarkTheme = withDarkThemeToggle(PriceTicker)
+
+<PriceTickerWithDarkTheme />
+```
+
+---
+
+export default Invert
+
+<PriceTickerWithDarkTheme />
 
 ---
 export default Invert
@@ -247,6 +281,7 @@ export default Invert
 
 ## Advantages
 ## Disadvantages
+- where did this prop come from?
 
 ---
 
@@ -266,29 +301,37 @@ export default Invert
 
 ## Remember: In JSX, curly braces indicate an argument to React.createElement()
 
+[See Babel](https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9SA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=) 
+
+---
+
+## We can implement an HOC with a Render Prop
+
 ---
 export default Invert
 
 # Render Props
 
 ## Advantages
+- very flexible
+- unopinionated
+- reduce naming collisions
+- dynamic composition (composing inside render())
+
 ## Disadvantages
+- nesting can lead to hideous render() methods
+- can be difficult to test
 
 ---
 
 # The Future of Render Props
 
-`show suspense example`
-
 ---
+
+export default Invert
 
 <img src="./assets/images/salt.svg" width="400px" height="auto"/>
 
 ---
 
 # Thanks
-
----
-
-
-# The end
