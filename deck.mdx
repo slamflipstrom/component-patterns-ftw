@@ -291,11 +291,56 @@ export default Invert
 
 ---
 
+## Traditional Rendering of Child Components
+
+```
+const Parent = (props) => {
+  return (
+    <div>
+      { props.children }
+    </div>
+  )
+}
+```
+
+```
+<Parent>
+  <Child />
+</Parent>
+```
+
+---
+## Traditional Rendering of Child Components
+
+```
+const Parent = (props) => {
+  return (
+    <div>
+      { props.render }
+    </div>
+  )
+}
+```
+
+```
+<Parent render={(something) => '<h1>Render ${something}</h1>'} />
+```
+
+--- 
+
 # Understanding JSX
 
 ---
 
 ## Remember: JSX is just a function call
+
+```
+React.createElement(
+  type,
+  [props],
+  [...children]
+)
+```
 
 ---
 
