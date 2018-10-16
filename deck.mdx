@@ -5,6 +5,7 @@ import {CodeSurfer } from "mdx-deck-code-surfer"
 import nightOwl from "prism-react-renderer/themes/nightOwl"
 
 import  PriceTicker  from 'components/PriceTicker/PriceTicker'
+import  PriceTickerCompound  from 'components/PriceTicker/PriceTickerCompound'
 import  Tooltip  from 'components/Tooltip/Tooltip'
 import  withThemeToggle  from 'components/darkThemeToggle/darkThemeToggle'
 
@@ -12,14 +13,26 @@ import  withThemeToggle  from 'components/darkThemeToggle/darkThemeToggle'
 ---
 
 # Some background
+
 <Notes>
-  Only visible in presenter mode
+  Help us to combat:
+  - ill-defined project requirements, constant design changes, poorly documented code
 </Notes>
+
 ---
 <CodeSurfer 
   code={require("raw-loader!./snippets/first.snippet")}
   theme={nightOwl}
 />
+---
+
+# React Component API
+- render
+- state
+- props
+- context
+- lifecycle events
+
 ---
 # Stateful Component
 ---
@@ -65,7 +78,7 @@ export default Invert
 ---
 export default Invert
 
-# Stateless Functional 
+# Stateless Functional Component
 
 ## Advantages
  - simplicity
@@ -75,7 +88,9 @@ export default Invert
  - no 'this' keyword
 
 ## Disadvantages
-  - unable to manage state
+  - design inconsistencies
+  - conversion hassle
+  - can't I just use a PureComponent?
 
 <Notes>Inability to manage state is more of a feature and not a bug</Notes>
 
@@ -105,6 +120,87 @@ Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless
 />
 
 ---
+
+# Stakeholder Demands
+
+ *"We want to allow users refresh prices whenever they'd like"*
+
+---
+
+# Compound Components
+
+<Notes>
+  - Inversion of control
+  - Abstracts away some complexity by managing state within itself
+  - Turning your components into legos
+</Notes>
+
+---
+
+Great for handling Rendering logic
+
+<Notes>Consider for a moment some of your own code. Do you have a React component that keeps getting new rendering options?
+  - Ryan Florence has a great talk on this though he doesn't use static properties
+</Notes>
+
+---
+
+## Building a Compound Component
+
+- static properties
+- React.Children.Map
+- React.cloneElement
+
+<Notes>
+  - `static`  (ES6) defines static methods on a class. Included by default in CRA
+</Notes>
+
+---
+
+<CodeSurfer 
+  code={require("raw-loader!./snippets/compound.snippet")}
+  title="Implementation"
+  theme={nightOwl}
+/>
+
+---
+
+# Stuff
+
+<CodeSurfer 
+  code={require("raw-loader!./snippets/compound-usage.snippet")}
+  title="not"
+  theme={nightOwl}
+/>
+
+---
+
+<PriceTickerCompound>
+  <PriceTickerCompound.Button>Update</PriceTickerCompound.Button>
+  <PriceTickerCompound.Row currency="BTC" />
+  <PriceTickerCompound.Row currency="ETH" />
+</PriceTickerCompound>
+
+---
+
+export default Invert
+
+# Compound Component
+
+## Advantages
+ - inverts rendering control to your user
+ - flexible to change
+ - great for code sharing and reuse
+
+## Disadvantages
+  - can't access nested children (without the Context API) 
+  - can lead to bloated render() methods
+
+<Notes>
+  - Can be combined with the new React Context API to pass state to deeply nested children
+</Notes>
+---
+
 
 # Stakeholder Demands
 
@@ -155,10 +251,20 @@ export default Invert
 ---
 
 # Render Props 
+## (or Render Callback)
+## (or Children as a Function)
 
 ---
 
 # Understanding JSX
+
+---
+
+## Remember: JSX is just a function call
+
+---
+
+## Remember: In JSX, curly braces indicate an argument to React.createElement()
 
 ---
 export default Invert

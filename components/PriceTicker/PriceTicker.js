@@ -16,7 +16,7 @@ class PriceTicker extends React.Component {
 
     this.interval = null
     this.state = {
-      prices: {},
+      prices: {}
     }
   }
 
