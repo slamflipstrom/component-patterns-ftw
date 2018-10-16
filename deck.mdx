@@ -9,9 +9,8 @@ import  PriceTicker  from 'components/PriceTicker/PriceTicker'
 import  PriceTickerCompound  from 'components/PriceTicker/PriceTickerCompound'
 import  PriceTickerWithDarkThemeHOC  from 'components/PriceTicker/PriceTickerHOC'
 import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceTickerRenderProps'
-// import  Tooltip  from 'components/Tooltip/Tooltip'
 
-# React Component Patterns
+# React Component Patterns FTW
 
 ### Sam Lindstrom
 
@@ -31,15 +30,12 @@ import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceT
 
 # Why Should We Care?
 
-<Notes>
-  They help us to combat:
-    <br/>
+---
+
+  ## Design Patterns Help Combat:
   - ill-defined project requirements 
-    <br/>
   - constant design changes 
-    <br/>
   - poorly documented code
-</Notes>
 
 ---
 
@@ -300,10 +296,6 @@ export default Invert
 
 <Notes>
   - Just a generic container, wrapped up in a function
-    <br/>
-  - Allows for more declarative code
-    <br/>
-  - In contrast to first order functions, which don’t take a function as an argument or return a function as output
 </Notes>
 
 ---
@@ -397,7 +389,7 @@ const Parent = (props) => {
   const Parent = (props) => {
     return (
       <div>
-        { props.render }
+        { props.render() }
       </div>
     )
   }
@@ -406,7 +398,7 @@ const Parent = (props) => {
 <br/>
 
 ```jsx
-<Parent render={(something) => '<h1>Render ${something}</h1>'} />
+<Parent render={(name = "React Denver") => '<h1>Hi ${name}!</h1>'} />
 ```
 
 ---
@@ -432,7 +424,10 @@ React.createElement(
 
 ## In JSX, curly braces indicate an argument to React.createElement()
 
+---
+
 <a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9SA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">See Babel</a>
+<br/>
 <a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9QfAkKiDqEoQchK5UBzTQgAHlAIYJw6AEoIKsBQBgDCIGo44KGwNHQMYQh4WKQZdPSMLGxYtIV0XHxk5RV07iKUUHDaBnpERuoIJtK1hRZWNRXE5fb21OwNnt4QfprGCOgARFExsAAiobw5SzDmNQ6H5uYwUdl4MAAKBETUoJCw19zACAAqzwDWOQDq3M3rKjwH1eiA0Z04OWu-gw2FI6AoZUqv3-gOBoLeIF8viQCDIlDy5A4Txe72AXwu-zM5mRcABQJBCA0r0x2Nx1BGQA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">
   More Examples
 </a>
@@ -458,9 +453,6 @@ export default Invert
 
 ---
 
-## We can implement an HOC with a Render Prop
-
----
 export default Invert
 
 ## Render Props

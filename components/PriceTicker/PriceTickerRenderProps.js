@@ -21,7 +21,7 @@ class WithDarkThemeToggle extends React.Component {
         onClick={this.toggleDarkMode}
         className={`DarkThemeToggle${isEnabled}`}
       >
-        {this.props.children()}
+        {this.props.render()}
       </div>
     )
   }
@@ -73,7 +73,7 @@ class PriceTicker extends React.Component {
 }
 
 const PriceTickerWithDarkThemeRenderProps = () => (
-  <WithDarkThemeToggle>{() => <PriceTicker />}</WithDarkThemeToggle>
+  <WithDarkThemeToggle render={() => <PriceTicker />} />
 )
 
 export default PriceTickerWithDarkThemeRenderProps
