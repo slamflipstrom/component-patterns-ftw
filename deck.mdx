@@ -13,7 +13,6 @@ import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceT
 
 # React Component Patterns
 
-  
 ### Sam Lindstrom
 
 ---
@@ -21,8 +20,25 @@ import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceT
 # Some background
 
 <Notes>
-  Help us to combat:
-  - ill-defined project requirements, constant design changes, poorly documented code
+  - Relatively new to React
+    <br/>
+  - Saw OSS maintainers and coworkers using interesting patterns
+    <br/>
+  - Wanted to level up my React 
+</Notes>
+
+---
+
+# Why Should We Care?
+
+<Notes>
+  They help us to combat:
+    <br/>
+  - ill-defined project requirements 
+    <br/>
+  - constant design changes 
+    <br/>
+  - poorly documented code
 </Notes>
 
 ---
@@ -30,6 +46,7 @@ import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceT
 <CodeSurfer 
   code={require("raw-loader!./snippets/first.snippet")}
   theme={nightOwl}
+  showNumbers
 />
 
 ---
@@ -40,6 +57,15 @@ import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceT
 - props
 - context
 - lifecycle events
+
+
+<Notes>
+  - examples are contrived and in some cases, impractical
+    <br/>
+  - the goal is to illustrate interaction between components 
+    <br/>
+  - and to hopefully inspire greater curiousity on these patterns
+</Notes>
 
 ---
 
@@ -68,11 +94,27 @@ export default Invert
 
 export default Invert
 
-## Advantages
+## Stateful Component
+
+### Advantages
 - Easy to manage component state
-## Disadvantages
+- Standard technique with ample documentation
+- ES6 classes
+
+### Disadvantages
 - Can be more complexity than we need
 - Not all components need to manage state
+- ES6 classes
+
+
+<Notes>
+  React.PureComponent is similar to React.Component. 
+    <br/>
+  The difference between them is that Component doesn’t implement shouldComponentUpdate(), 
+  but PureComponent implements it with a shallow prop and state comparison.
+    <br/>
+  - ^helps to avoid unnecessary re-renders
+</Notes>
 
 ---
 
@@ -84,37 +126,37 @@ export default Invert
   code={require("raw-loader!./snippets/sfc.snippet")}
   title="Stateless Functional Component (SFC)"
   theme={nightOwl}
+  showNumbers
 />
 
 ---
 
 export default Invert
 
-# Stateless Functional
+## Stateless Functional
 
-`TODO: fix sizing`
-
-## Advantages
+### Advantages
  - simplicity
  - enforces pure function practices (zero side effects)
  - easy to test
  - eliminates ES6 class related boilerplate (constructor(), extends, etc)
  - no 'this' keyword
 
-## Disadvantages
+### Disadvantages
   - design inconsistencies
   - conversion hassle
   - can't I just use a PureComponent?
 
-<Notes>Inability to manage state is more of a feature and not a bug</Notes>
-
 ---
 
-`TODO: fix sizing`
+<a target="_blank" href="https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc">
+  <Image src="./assets/images/sfc-stateful-babel-comparision.png" size="1200px" />
+</a>
 
-<Image src="./assets/images/sfc-stateful-babel-comparision.png" size="900px" />
+<Notes>
+  Source: Cory House's Hacker Noon Blog Post on SFC's: <br/> https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc
+</Notes>
 
-Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc)
 
 ---
 
@@ -126,6 +168,7 @@ Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless
   code={require("raw-loader!./snippets/p&c.snippet")}
   title="Presentational + Container"
   theme={nightOwl}
+  showNumbers
   steps={[
     { notes: ''},
     { range: [1,7]},
@@ -144,19 +187,14 @@ Source: [Cory House's Blog Post on SFC's](https://hackernoon.com/react-stateless
 
 # Compound Components
 
-<Notes>
-  - Inversion of control
-  - Abstracts away some complexity by managing state within itself
-  - Turning your components into legos
-</Notes>
-
 ---
 
 Great for handling Rendering logic
 
 <Notes>
-  - Consider for a moment some of your own code. Do you have a React component that keeps getting new rendering options?
-  - Ryan Florence has a great talk on this though he doesn't use static properties
+  - Inversion of control
+    <br/>
+  - Abstracts away some complexity by managing state within itself
 </Notes>
 
 ---
@@ -177,6 +215,7 @@ Great for handling Rendering logic
   code={require("raw-loader!./snippets/compound.snippet")}
   title="Implementation"
   theme={nightOwl}
+  showNumbers
   steps={[
     { notes: ''},
     { range: [5,15]},
@@ -185,12 +224,21 @@ Great for handling Rendering logic
   ]}
 />
 
+<Notes>
+  - Consider for a moment some of your own code. Do you have a React component that keeps getting new rendering options?
+    <br/>
+  - Ryan Florence has a great talk on this though he doesn't use static properties
+    <br/>
+  - His workshop begins tomorrow
+</Notes>
+
 ---
 
 <CodeSurfer 
   code={require("raw-loader!./snippets/compound-usage.snippet")}
   title="Usage"
   theme={nightOwl}
+  showNumbers
 />
 
 ---
@@ -207,16 +255,18 @@ export default Invert
 
 export default Invert
 
-# Compound Component
-`TODO: fix sizing`
+## Compound Component
 
+<br/>
 
-## Advantages
+### Advantages
  - inverts rendering control to your user
  - flexible to change
  - great for code sharing and reuse
 
-## Disadvantages
+<br/>
+
+### Disadvantages
   - can't access nested children (without the Context API) 
   - can lead to bloated render() methods
 
@@ -236,23 +286,30 @@ export default Invert
 
 <Notes>
   - Common in 3rd party libraries
-  - Whereas a component transforms props into UI, a higher-order component transforms a component into another component.
+  <br/>
+  - A standard component transforms props into UI
+  <br/>
+  - a higher-order component transforms a component into another component
 </Notes>
 
 ---
 
 ## Higher Order Function:
 
-*A higher order function is a function that takes a function as an argument, or returns a function.*
+*A higher order function is a function that takes and/or returns a function*
 
 <Notes>
+  - Just a generic container, wrapped up in a function
+    <br/>
   - Allows for more declarative code
+    <br/>
   - In contrast to first order functions, which don’t take a function as an argument or return a function as output
 </Notes>
 
 ---
 
 ### Higher Order Function:
+
 Allows for more declarative code
 
 ---
@@ -268,13 +325,12 @@ Allows for more declarative code
   code={require("raw-loader!./snippets/hoc.snippet")}
   title="Implementation"
   theme={nightOwl}
+  showNumbers
 />
 
 ---
 
 ```jsx
-import PriceTicker from "../PriceTicker"
-
 const PriceTickerWithDarkThemeHOC = withDarkThemeToggle(PriceTicker)
 
 <PriceTickerWithDarkThemeHOC />
@@ -290,16 +346,21 @@ export default Invert
 
 export default Invert
 
-`TODO: build this out`
+## Higher Order Component (HOC)
 
-`TODO: fix sizing`
+### Advantages
+- allows for more composable code
+- is a pure function with zero side effects
+- leads to greater separation of concerns
 
-# Higher Order Component (HOC)
+### Disadvantages
+- prop obfuscation: where did this prop come from?
+- static composition
+- wrapping components overrides static methods of the original component
 
-## Advantages
-  - allows for more composable code
-## Disadvantages
-  - prop obfuscation: where did this prop come from?
+<Notes>
+  -Regarding refs: https://reactjs.org/docs/higher-order-components.html#refs-arent-passed-through
+</Notes>
 
 ---
 
@@ -310,7 +371,6 @@ export default Invert
 ---
 
 ## Traditional Rendering of Child Components
-`TODO: fix sizing`
 
 ```jsx
 const Parent = (props) => {
@@ -332,7 +392,6 @@ const Parent = (props) => {
 ---
 
 ## Rendering of Child Components via Render Prop
-`TODO: fix sizing`
 
 ```jsx
   const Parent = (props) => {
@@ -372,9 +431,11 @@ React.createElement(
 ---
 
 ## In JSX, curly braces indicate an argument to React.createElement()
-`TODO: show new RP example in this babel dash`
 
 <a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9SA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">See Babel</a>
+<a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9QfAkKiDqEoQchK5UBzTQgAHlAIYJw6AEoIKsBQBgDCIGo44KGwNHQMYQh4WKQZdPSMLGxYtIV0XHxk5RV07iKUUHDaBnpERuoIJtK1hRZWNRXE5fb21OwNnt4QfprGCOgARFExsAAiobw5SzDmNQ6H5uYwUdl4MAAKBETUoJCw19zACAAqzwDWOQDq3M3rKjwH1eiA0Z04OWu-gw2FI6AoZUqv3-gOBoLeIF8viQCDIlDy5A4Txe72AXwu-zM5mRcABQJBCA0r0x2Nx1BGQA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">
+  More Examples
+</a>
 
 ---
 
@@ -397,23 +458,20 @@ export default Invert
 
 ---
 
-TODO: Consider showing this
 ## We can implement an HOC with a Render Prop
 
 ---
 export default Invert
 
-# Render Props
+## Render Props
 
-`TODO: fix sizing`
-
-## Advantages
+### Advantages
 - very flexible
 - unopinionated
 - reduce naming collisions
 - dynamic composition (composing inside render())
 
-## Disadvantages
+### Disadvantages
 - nesting can lead to hideous render() methods
 - can be difficult to test
 
@@ -423,9 +481,26 @@ export default Invert
 
 ---
 
+## More Resources
+
+<Notes>
+  - the React docs
+    <br/>
+  - Kent C. Dodds Advanced React Patterns Course (FrontEnd Masters and Egghead)
+    <br/>
+  - Talks from Michael Jackson and Ryan Florence
+</Notes>
+
+---
+
 export default Invert
 
-<img src="./assets/images/salt.svg" width="400px" height="auto"/>
+<img src="./assets/images/salt.svg" width="500px" height="auto"/>
+
+<br/>
+<br/>
+
+### We're Hiring
 
 ---
 
