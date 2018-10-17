@@ -6,7 +6,7 @@ import "./PriceTicker.scss"
 const PriceTickerRow = ({ currency, price = "0.00" }) => {
   return (
     <div className="PriceTickerRow">
-      {currency}: ${price}
+      <strong>{currency}:</strong> ${price}
     </div>
   )
 }
@@ -17,7 +17,11 @@ class PriceTicker extends React.Component {
 
     this.interval = null
     this.state = {
-      prices: {}
+      prices: {
+        BTC: "6,596",
+        ETH: "210",
+        LTC: "54.17"
+      }
     }
   }
 
@@ -35,11 +39,12 @@ class PriceTicker extends React.Component {
   }
 
   render() {
+    const { prices } = this.state
     return (
       <div className="PriceTickerThemeToggle PriceTicker">
-        <PriceTickerRow currency="BTC" />
-        <PriceTickerRow currency="ETH" />
-        <PriceTickerRow currency="LTC" />
+        <PriceTickerRow currency="BTC" price={prices.BTC} />
+        <PriceTickerRow currency="ETH" price={prices.ETH} />
+        <PriceTickerRow currency="LTC" price={prices.LTC} />
         <button onClick={this.updatePrices} className="PriceTicker-btn">
           Refresh Prices
         </button>

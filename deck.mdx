@@ -19,8 +19,6 @@ import  PriceTickerWithDarkThemeRenderProps  from 'components/PriceTicker/PriceT
 # Some background
 
 <Notes>
-  - Relatively new to React
-    <br/>
   - Saw OSS maintainers and coworkers using interesting patterns
     <br/>
   - Wanted to level up my React 
@@ -102,16 +100,6 @@ export default Invert
 - Not all components need to manage state
 - ES6 classes
 
-
-<Notes>
-  React.PureComponent is similar to React.Component. 
-    <br/>
-  The difference between them is that Component doesn’t implement shouldComponentUpdate(), 
-  but PureComponent implements it with a shallow prop and state comparison.
-    <br/>
-  - ^helps to avoid unnecessary re-renders
-</Notes>
-
 ---
 
 # Stateless Functional Component
@@ -143,6 +131,14 @@ export default Invert
   - conversion hassle
   - can't I just use a PureComponent?
 
+<Notes>
+  React.PureComponent is similar to React.Component. 
+    <br/>
+  The difference between them is that Component doesn’t implement shouldComponentUpdate(), 
+  but PureComponent implements it with a shallow prop and state comparison.
+    <br/>
+  - ^helps to avoid unnecessary re-renders
+</Notes>
 ---
 
 <a target="_blank" href="https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc">
@@ -185,24 +181,12 @@ export default Invert
 
 ---
 
-Great for handling Rendering logic
+ ## Inversion of control
 
 <Notes>
-  - Inversion of control
+  - Great for handling rendering logic
     <br/>
-  - Abstracts away some complexity by managing state within itself
-</Notes>
-
----
-
-## Building a Compound Component
-
-- static properties
-- React.Children.Map
-- React.cloneElement
-
-<Notes>
-  - `static`  (ES6) defines static methods on a class. Included by default in CRA
+  - Manages state within itself thereby abstracting away some complexity
 </Notes>
 
 ---
@@ -226,6 +210,18 @@ Great for handling Rendering logic
   - Ryan Florence has a great talk on this though he doesn't use static properties
     <br/>
   - His workshop begins tomorrow
+</Notes>
+
+---
+
+## Building a Compound Component
+
+- static properties
+- React.Children.Map
+- React.cloneElement
+
+<Notes>
+  - `static`  (ES6) defines static methods on a class. Included by default in CRA
 </Notes>
 
 ---
@@ -283,7 +279,7 @@ export default Invert
 <Notes>
   - Common in 3rd party libraries
   <br/>
-  - A standard component transforms props into UI
+  - Remember: A standard component transforms props into UI
   <br/>
   - a higher-order component transforms a component into another component
 </Notes>
@@ -373,8 +369,6 @@ const Parent = (props) => {
   )
 }
 ```
-<br/>
-
 ```jsx
 <Parent>
   <Child />
@@ -394,9 +388,6 @@ const Parent = (props) => {
     )
   }
 ```
-
-<br/>
-
 ```jsx
 <Parent render={(name = "React Denver") => '<h1>Hi ${name}!</h1>'} />
 ```
@@ -422,13 +413,13 @@ React.createElement(
 
 ---
 
-## In JSX, curly braces indicate an argument to React.createElement()
+### In JSX, curly braces indicate an argument to React.createElement()
 
 ---
 
 <a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9SA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">See Babel</a>
 <br/>
-<a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYewdgzgLgBAFgUwDZJDAvDAFABwE4g4QCUGAfDAN4BQMMeCUArnmDADwAmAlgG5kAJZKhgB3EHiScAhDACyATxhgAhgFsEMbhCr5CEAHSqNAX3YB6HvwDc1E9QfAkKiDqEoQchK5UBzTQgAHlAIYJw6AEoIKsBQBgDCIGo44KGwNHQMYQh4WKQZdPSMLGxYtIV0XHxk5RV07iKUUHDaBnpERuoIJtK1hRZWNRXE5fb21OwNnt4QfprGCOgARFExsAAiobw5SzDmNQ6H5uYwUdl4MAAKBETUoJCw19zACAAqzwDWOQDq3M3rKjwH1eiA0Z04OWu-gw2FI6AoZUqv3-gOBoLeIF8viQCDIlDy5A4Txe72AXwu-zM5mRcABQJBCA0r0x2Nx1BGQA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">
+<a href="https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&spec=false&loose=false&code_lz=MYGwhgzhAEASCmIQHsCy8pgOb2vAHgC7wB2AJjAErxjCEB0AwsgLYAOyJph0A3gFDRoAJ1Jl4wgBQBKPoKEj4hAK7CS0SfIXQAPGQCWANwB8W7XEQpoAd2TCQZAITRUAT2gkwLXPpi9CABa-9GzCyGwQ9J7eAL5mQjoA9AYmZtLycXH8iYnQ1OQS0AAKYRH8wJwQPCX6wPAAKrUA1hIA6vqBACJgwk31AfDe-eLCJeEwALwashPGGvI67V09fQPe9chYWCDwxrwy0LO6NXWNwC3C0InGMUlLAd29_YMNm9u7_OlAA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=6.26.0&envVersion=" target="_blank">
   More Examples
 </a>
 
@@ -489,10 +480,13 @@ export default Invert
 
 <img src="./assets/images/salt.svg" width="500px" height="auto"/>
 
-<br/>
-<br/>
-
-### We're Hiring
+<Notes>
+  - We're Hiring
+    <br/>
+  - Node, Haskell, React, Rust
+    <br/>
+  - There are a few of us here so come talk to me or find someone in a SALT shirt
+</Notes>
 
 ---
 
