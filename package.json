@@ -7,6 +7,7 @@
     "start": "mdx-deck deck.mdx",
     "prebuild": "rimraf dist",
     "build": "npm run build:site && npm run build:pdf",
+    "build:no-html": "npm run build --no-html",
     "build:site": "mdx-deck build deck.mdx",
     "build:pdf": "mdx-deck pdf deck.mdx",
     "test": "test"
