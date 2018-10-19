@@ -1,5 +1,18 @@
 import React from "react"
-import "../withDarkThemeToggle/withDarkThemeToggle.scss"
+
+import styled from "styled-components"
+
+import {
+  PriceTickerStyled,
+  PriceTickerRowStyled,
+  PriceTickerBtnStyled
+} from "./styles.js"
+
+export const WithDarkTheme = styled.div`
+  background-color: rgb(36, 38, 38);
+  color: whitesmoke;
+  filter: invert(1);
+`
 
 class WithDarkThemeToggle extends React.Component {
   state = {
@@ -15,23 +28,26 @@ class WithDarkThemeToggle extends React.Component {
   }
 
   render() {
-    const isEnabled = this.state.darkTheme ? "-enabled" : ""
+    const { darkTheme } = this.state
     return (
-      <div
-        onClick={this.toggleDarkMode}
-        className={`DarkThemeToggle${isEnabled}`}
-      >
-        {this.props.render()}
-      </div>
+      <React.Fragment>
+        {darkTheme ? (
+          <WithDarkTheme onClick={this.toggleDarkMode}>
+            {this.props.render()}
+          </WithDarkTheme>
+        ) : (
+          <div onClick={this.toggleDarkMode}>{this.props.render()}</div>
+        )}
+      </React.Fragment>
     )
   }
 }
 
 const PriceTickerRow = ({ currency, price = "0.00" }) => {
   return (
-    <div className="PriceTickerRow">
+    <PriceTickerRowStyled>
       <strong>{currency}:</strong> ${price}
-    </div>
+    </PriceTickerRowStyled>
   )
 }
 
@@ -65,14 +81,14 @@ class PriceTicker extends React.Component {
   render() {
     const { prices } = this.state
     return (
-      <div className="PriceTicker">
+      <PriceTickerStyled>
         <PriceTickerRow currency="BTC" price={prices.BTC} />
         <PriceTickerRow currency="ETH" price={prices.ETH} />
         <PriceTickerRow currency="LTC" price={prices.LTC} />
-        <button onClick={this.updatePrices} className="PriceTicker-btn">
+        <PriceTickerBtnStyled onClick={this.updatePrices}>
           Refresh Prices
-        </button>
-      </div>
+        </PriceTickerBtnStyled>
+      </PriceTickerStyled>
     )
   }
 }

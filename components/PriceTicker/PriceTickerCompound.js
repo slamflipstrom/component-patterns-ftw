@@ -1,17 +1,19 @@
 import React from "react"
 
-import "./PriceTicker.scss"
+import {
+  PriceTickerStyled,
+  PriceTickerRowStyled,
+  PriceTickerBtnStyled
+} from "./styles.js"
 
 class PriceTickerCompound extends React.Component {
   static Row = ({ currency, prices }) => (
-    <li className="PriceTickerRow">
+    <PriceTickerRowStyled>
       <strong>{currency}:</strong> ${prices[currency]}
-    </li>
+    </PriceTickerRowStyled>
   )
   static Button = ({ children, onClick }) => (
-    <button onClick={onClick} className="PriceTicker-btn">
-      {children}
-    </button>
+    <PriceTickerBtnStyled onClick={onClick}>{children}</PriceTickerBtnStyled>
   )
 
   constructor() {
@@ -41,14 +43,14 @@ class PriceTickerCompound extends React.Component {
   render() {
     const { children } = this.props
     return (
-      <div className="PriceTicker">
+      <PriceTickerStyled>
         {React.Children.map(children, child => {
           return React.cloneElement(child, {
             onClick: this.updatePrices,
             prices: this.state.prices
           })
         })}
-      </div>
+      </PriceTickerStyled>
     )
   }
 }

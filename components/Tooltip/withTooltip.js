@@ -1,18 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import "./Tooltip.scss"
-
 class withTooltip extends React.Component {
   state = {
-    open: false,
+    open: false
   }
 
   toggleOpen = e => {
     e.preventDefault()
 
     this.setState({
-      open: !this.state.open,
+      open: !this.state.open
     })
   }
 
@@ -20,10 +18,11 @@ class withTooltip extends React.Component {
     const { id } = this.props
     if (
       !e.target.id ||
-      (e.target.id !== `tooltip-${id}-button` && e.target.id !== `tooltip-${id}-contents`)
+      (e.target.id !== `tooltip-${id}-button` &&
+        e.target.id !== `tooltip-${id}-contents`)
     ) {
       this.setState({
-        open: false,
+        open: false
       })
     }
   }
@@ -73,14 +72,15 @@ class withTooltip extends React.Component {
 
 withTooltip.propTypes = {
   className: PropTypes.string,
-  contents: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  contents: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    .isRequired,
   direction: PropTypes.oneOf(["top", "bottom", "right", "left"]),
   header: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.string
 }
 
 withTooltip.defaultProps = {
-  direction: "right",
+  direction: "right"
 }
 
 export default withTooltip

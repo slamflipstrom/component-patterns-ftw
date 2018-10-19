@@ -1,26 +1,40 @@
 import React from "react"
-import "./withDarkThemeToggle.scss"
+import styled from "styled-components"
+
+export const WithDarkTheme = styled.div`
+  background-color: rgb(36, 38, 38);
+  color: whitesmoke;
+  filter: invert(1);
+`
 
 const withDarkThemeToggle = WrappedComponent => {
   return class extends React.Component {
     state = {
-      darkTheme: false,
+      withDarkTheme: false
     }
 
     toggleDarkMode = e => {
       e.preventDefault()
 
       this.setState({
-        darkTheme: !this.state.darkTheme,
+        withDarkTheme: !this.state.withDarkTheme
       })
     }
 
     render() {
-      const isEnabled = this.state.darkTheme ? "-enabled" : ""
+      const { withDarkTheme } = this.state
       return (
-        <div onClick={this.toggleDarkMode} className={`DarkThemeToggle${isEnabled}`}>
-          <WrappedComponent {...this.props} />
-        </div>
+        <React.Fragment>
+          {withDarkTheme ? (
+            <WithDarkTheme onClick={this.toggleDarkMode}>
+              <WrappedComponent {...this.props} />
+            </WithDarkTheme>
+          ) : (
+            <div onClick={this.toggleDarkMode}>
+              <WrappedComponent {...this.props} />
+            </div>
+          )}
+        </React.Fragment>
       )
     }
   }

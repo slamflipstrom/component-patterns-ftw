@@ -1,12 +1,12 @@
 import React from "react"
 
-import "./PriceTicker.scss"
+import { PriceTickerStyled, PriceTickerRowStyled } from "./styles.js"
 
 const PriceTickerRow = ({ currency, price = "0.00" }) => {
   return (
-    <div className="PriceTickerRow">
+    <PriceTickerRowStyled>
       <strong>{currency}:</strong> ${price}
-    </div>
+    </PriceTickerRowStyled>
   )
 }
 
@@ -40,11 +40,11 @@ class PriceTicker extends React.Component {
   render() {
     const { prices } = this.state
     return (
-      <div className="PriceTicker">
+      <PriceTickerStyled>
         <PriceTickerRow currency="BTC" price={prices.BTC} />
         <PriceTickerRow currency="ETH" price={prices.ETH} />
         <PriceTickerRow currency="LTC" price={prices.LTC} />
-      </div>
+      </PriceTickerStyled>
     )
   }
 }
