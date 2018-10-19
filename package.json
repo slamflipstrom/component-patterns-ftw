@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "mdx-deck deck.mdx",
-    "build": "mdx-deck build deck.mdx",
+    "prebuild": "rimraf dist",
+    "build": "npm run build:site && npm run build:pdf",
+    "build:site": "mdx-deck build deck.mdx",
+    "build:pdf": "mdx-deck pdf deck.mdx",
     "test": "test"
   },
   "author": "Sam Lindstrom",
@@ -16,6 +19,7 @@
     "mdx-deck-code-surfer": "^0.5.1",
     "node-sass": "^4.9.3",
     "raw-loader": "^0.5.1",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "svg-react-loader": "^0.4.5",
