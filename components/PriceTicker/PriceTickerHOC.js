@@ -1,13 +1,17 @@
 import React from "react"
 import withDarkThemeToggle from "../withDarkThemeToggle/withDarkThemeToggle"
 
-import "./PriceTicker.scss"
+import {
+  PriceTickerStyled,
+  PriceTickerRowStyled,
+  PriceTickerBtnStyled
+} from "./styles.js"
 
 const PriceTickerRow = ({ currency, price = "0.00" }) => {
   return (
-    <div className="PriceTickerRow">
+    <PriceTickerRowStyled>
       <strong>{currency}:</strong> ${price}
-    </div>
+    </PriceTickerRowStyled>
   )
 }
 
@@ -41,14 +45,14 @@ class PriceTicker extends React.Component {
   render() {
     const { prices } = this.state
     return (
-      <div className="PriceTickerThemeToggle PriceTicker">
+      <PriceTickerStyled>
         <PriceTickerRow currency="BTC" price={prices.BTC} />
         <PriceTickerRow currency="ETH" price={prices.ETH} />
         <PriceTickerRow currency="LTC" price={prices.LTC} />
-        <button onClick={this.updatePrices} className="PriceTicker-btn">
+        <PriceTickerBtnStyled onClick={this.updatePrices}>
           Refresh Prices
-        </button>
-      </div>
+        </PriceTickerBtnStyled>
+      </PriceTickerStyled>
     )
   }
 }
