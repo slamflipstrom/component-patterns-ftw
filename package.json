@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "mdx-deck deck.mdx",
-    "prebuild": "rimraf dist",
-    "build": "npm run build:site && npm run build:pdf",
+    "build": "npm run clean && npm run static && npm run build:no-html",
     "build:no-html": "mdx-deck build deck.mdx --no-html",
-    "build:site": "mdx-deck build deck.mdx",
-    "build:pdf": "mdx-deck pdf deck.mdx",
-    "test": "test"
+    "clean": "rm -rf dist",
+    "static": "mkdir -p dist/assets && cp -R assets dist/",
+    "html": "mdx-deck build deck.mdx -d dist",
+    "pdf": "mdx-deck pdf deck.mdx -d dist"
   },
   "author": "Sam Lindstrom",
   "license": "ISC",
